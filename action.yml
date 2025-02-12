@@ -1,0 +1,20 @@
+name: "Test Action"
+description: "Test Action"
+author: "Shane"
+branding:
+  icon: "type"
+  color: "green"
+
+inputs:
+  token:
+    description: "Token"
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  results:
+    description: "Results"
+
+runs:
+  using: "node20"
+  main: "dist/index.js"
