@@ -1,4 +1,4 @@
-name: "Main"
+name: "Extra"
 
 on:
   workflow_dispatch:
@@ -14,16 +14,12 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: "Debug"
-        run: |
-          echo ${{ github.workflow_ref }}
-
-      - name: "Test Local Action"
+      - name: "Docker Test Action"
         id: test
-        uses: smashedr/test-action@master
+        uses: smashedr/docker-test-action@v1
         #with:
         #  token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: "Echo Outputs"
         run: |
-          echo results: '${{ steps.test.outputs.results }}'
+          echo output: '${{ steps.test.outputs.sha }}'
