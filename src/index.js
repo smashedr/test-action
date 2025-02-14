@@ -6,6 +6,7 @@ const core = require('@actions/core')
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
+        console.log('GITHUB_WORKFLOW_REF:', process.env.GITHUB_WORKFLOW_REF)
 
         // Inputs
         const token = core.getInput('token', { required: true })
