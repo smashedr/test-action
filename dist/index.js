@@ -27589,8 +27589,8 @@ const core = __nccwpck_require__(7484)
 
         // $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
         core.summary.addRaw(
-            `\n\n<sup><sub><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/run/${process.env.GITHUB_RUN_ID}">` +
-                `View Logs</a></sup></sub>\n\n`
+            `\n\n<small><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}/job/${process.env.GITHUB_RUN_ID}">` +
+                `View Logs</a></small>\n\n`
         )
 
         const text = 'View Documentation, Report Issues or Request Features'
