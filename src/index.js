@@ -7,7 +7,7 @@ const core = require('@actions/core')
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
         core.startGroup('Debug')
-        console.log('GITHUB_WORKFLOW_REF:', process.env.GITHUB_WORKFLOW_REF)
+        console.log('process.env:', process.env)
         core.endGroup()
 
         // Inputs
@@ -32,7 +32,7 @@ const core = require('@actions/core')
 
         // $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
         core.summary.addRaw(
-            `\n\n<sup><sub><a href="${process.env.$GITHUB_SERVER_URL}/${process.env.$GITHUB_REPOSITORY}/actions/run/${process.env.$GITHUB_RUN_ID}">` +
+            `\n\n<sup><sub><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/run/${process.env.GITHUB_RUN_ID}">` +
                 `View Logs</a></sup></sub>\n\n`
         )
 
