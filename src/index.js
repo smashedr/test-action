@@ -1,14 +1,19 @@
 const core = require('@actions/core')
-// const github = require('@actions/github')
+const github = require('@actions/github')
 
 ;(async () => {
     try {
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
-        core.startGroup('Debug')
+        core.startGroup('github')
+        console.log('github:', github)
+        core.endGroup()
+        core.startGroup('process.env')
         console.log('process.env:', process.env)
         core.endGroup()
+
+        console.log('github.job:', github.job)
 
         // Inputs
         core.startGroup('Inputs')
@@ -32,8 +37,8 @@ const core = require('@actions/core')
 
         // $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
         core.summary.addRaw(
-            `\n\n<small><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}/job/${process.env.GITHUB_RUN_ID}">` +
-                `View Logs</a></small>\n\n`
+            `\n\n<sup><sub><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}/job/${github.job.id}">` +
+                `View Logs</a></sup></sub>\n\n`
         )
 
         const text = 'View Documentation, Report Issues or Request Features'
