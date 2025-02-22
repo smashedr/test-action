@@ -6,14 +6,18 @@ const github = require('@actions/github')
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
+
         core.startGroup('github')
-        console.log('github:', github)
-        core.endGroup()
-        core.startGroup('process.env')
-        console.log('process.env:', process.env)
+        console.log(github)
         core.endGroup()
 
-        console.log('github.job:', github.job)
+        core.startGroup('github.context.payload.repository')
+        console.log(github.context.payload.repository)
+        core.endGroup()
+
+        core.startGroup('process.env')
+        console.log(process.env)
+        core.endGroup()
 
         // Inputs
         core.startGroup('Inputs')
@@ -37,7 +41,7 @@ const github = require('@actions/github')
 
         // $GITHUB_SERVER_URL/$GITHUB_REPOSITORY/actions/runs/$GITHUB_RUN_ID
         core.summary.addRaw(
-            `\n\n<sup><sub><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}/job/${github.job.id}">` +
+            `\n\n<sup><sub><a href="${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}/job/${process.env.GITHUB_JOB}">` +
                 `View Logs</a></sup></sub>\n\n`
         )
 
