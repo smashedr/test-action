@@ -29,13 +29,13 @@ jobs:
       - name: "Step 1"
         run: |
           echo step 1
-          exit 1
+          npm install --silent prettier
 
       - name: "Step 2"
         run: |
-          echo step 2
+          npx prettier --check .
 
       - name: "Step 3"
         if: always()
         run: |
-          echo step 3
+          prettier --check .
