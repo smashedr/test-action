@@ -1,0 +1,41 @@
+name: "Other"
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  test:
+    name: "Test"
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    permissions:
+      contents: write
+
+    steps:
+      #- name: "Checkout"
+      #  uses: actions/checkout@v4
+
+      #- name: "Docker Test Action"
+      #  id: test
+      #  uses: smashedr/docker-test-action@v1
+      #  #with:
+      #  #  token: ${{ secrets.GITHUB_TOKEN }}
+
+      #- name: "Echo Outputs"
+      #  run: |
+      #    echo output: '${{ steps.test.outputs.sha }}'
+
+      - name: "Step 1"
+        run: |
+          echo step 1
+          exit 1
+
+      - name: "Step 2"
+        run: |
+          echo step 2
+
+      - name: "Step 3"
+        if: always()
+        run: |
+          echo step 3
