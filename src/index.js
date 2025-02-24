@@ -6,6 +6,7 @@ const github = require('@actions/github')
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
+        console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
 
         core.startGroup('github')
         console.log(github)
