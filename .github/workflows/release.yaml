@@ -15,3 +15,24 @@ jobs:
     steps:
       - name: "Update Tags"
         uses: cssnr/update-version-tags-action@master
+
+      - name: "release"
+        if: ${{ github.event_name == 'release' }}
+        run: |
+          echo yes
+
+      - name: "prerelease"
+        if: ${{ github.event.release.prerelease }}
+        run: |
+          echo yes
+
+      - name: "Debug event.json"
+        if: ${{ always() }}
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
+          echo ---
+          echo ${{ github.event }}
+          echo ---
+          echo ${{ github.event.release }}
+          echo ---
+          echo ${{ github.event.release.prerelease }}
