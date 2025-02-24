@@ -3,10 +3,12 @@ const github = require('@actions/github')
 
 ;(async () => {
     try {
+        const version = process.env.GITHUB_ACTION_REF || 'Local'
+        core.info(`🏳️ Starting Test Action - ${version}`)
+
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)
-        console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
 
         core.startGroup('github')
         console.log(github)
