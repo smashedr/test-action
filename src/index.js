@@ -3,7 +3,9 @@ const github = require('@actions/github')
 
 ;(async () => {
     try {
-        const version = process.env.GITHUB_ACTION_REF || 'Local'
+        const version = process.env.GITHUB_ACTION_REF
+            ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
+            : 'Local'
         core.info(`🏳️ Starting Test Action - ${version}`)
 
         // Debug
