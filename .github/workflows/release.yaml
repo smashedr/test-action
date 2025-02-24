@@ -16,8 +16,13 @@ jobs:
       - name: "Update Tags"
         uses: cssnr/update-version-tags-action@master
 
-      - name: "release"
-        if: ${{ github.event_name == 'release' }}
+      - name: "Debug event.json"
+        if: ${{ always() }}
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
+
+      - name: "not a release"
+        if: ${{ github.event_name != 'release' }}
         run: |
           echo yes
 
@@ -26,13 +31,7 @@ jobs:
         run: |
           echo yes
 
-      - name: "Debug event.json"
-        if: ${{ always() }}
+      - name: "release"
+        if: ${{ !github.event.release.prerelease }}
         run: |
-          cat "${GITHUB_EVENT_PATH}"
-          echo ---
-          echo ${{ github.event }}
-          echo ---
-          echo ${{ github.event.release }}
-          echo ---
-          echo ${{ github.event.release.prerelease }}
+          echo yes
