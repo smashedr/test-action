@@ -1,9 +1,9 @@
 # Overview
 
-<!--- Provide a general summary of your changes in the Title above -->
 
-<!--- Describe your changes in detail -->
 
 ## Checklist
+
+<!-- Do NOT remove existing tasks -->
 
 - [ ] Verify Required Checks are Passing
