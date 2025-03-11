@@ -13,13 +13,18 @@ jobs:
       contents: write
 
     steps:
-      - name: "Update Tags"
-        uses: cssnr/update-version-tags-action@master
-
       - name: "Debug event.json"
         if: ${{ always() }}
         run: |
           cat "${GITHUB_EVENT_PATH}"
+
+      - name: "Update Version Tags"
+        id: tags
+        uses: cssnr/update-version-tags-action@master
+
+      - name: "Debug Tags"
+        run: |
+          echo "tags: ${{ steps.tags.outputs.tags }}"
 
       - name: "not a release"
         if: ${{ github.event_name != 'release' }}
