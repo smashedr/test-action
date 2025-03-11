@@ -1,17 +1,19 @@
 <!-- -------^^^^^---------- -->
 
-
-<!-- IMPORTANT: Click on the **Preview** tab above, next to Write! -->
-
-<!-- Do not edit this template. Select one from the Preview tab. -->
+<!-- IMPORTANT: Click on the "Preview" tab above! -->
 
 
-From here select a PR template below to begin.
+<!-- Do NOT edit this template! Select one from the "Preview" tab. -->
 
-### Community Templates
+
+<!-- From the "Preview" tab you can select a template below. -->
+
+Click on a Template link below to get started...
+
+### Community Templates ❤️
 
 - [Default Template](?expand=1&template=default.md)
 
-### Maintainer Templates
+### Maintainer Templates 🔒
 
 - [Release Template](?expand=1&template=release.md)
