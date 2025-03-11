@@ -1,11 +1,12 @@
 # Overview
 
-Description
+Delete this text and type your description here.
 
 ## Checklist
 
-- [ ] Verify Required Tests are Passing
+- [ ] Verify Required Checks are Passing
 
-### Release
+### Maintainers Only Release Checklist
 
-- [ ] Verify Tags are Updated in [README.md](README.md)
+- [ ] Verify Tags Badge is Updated in the [README.md](../README.md)
+- [ ] Verify Image Tag is Updated in the [action.yml](../action.yml)
