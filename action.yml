@@ -10,6 +10,9 @@ inputs:
     description: "Token"
     required: false
     default: ${{ github.token }}
+  multi:
+    description: "Multi Shit"
+    required: false
 
 outputs:
   results:

@@ -31837,6 +31837,9 @@ const github = __nccwpck_require__(3228)
             : 'Local'
         core.info(`🏳️ Starting Test Action - ${version}`)
 
+        const multi = core.getMultilineInput('multi')
+        console.log('multi:', multi)
+
         // Debug
         // console.log('github.context:', github.context)
         // console.log('process.env:', process.env)

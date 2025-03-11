@@ -3,6 +3,7 @@ name: "Other"
 on:
   workflow_dispatch:
   push:
+    branches: ["**"]
 
 jobs:
   other:
@@ -15,6 +16,11 @@ jobs:
     steps:
       - name: "Checkout"
         uses: actions/checkout@v4
+
+      - name: "Debug event.json"
+        if: ${{ always() }}
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
 
       - name: "Other 1"
         run: |

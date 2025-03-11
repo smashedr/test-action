@@ -35,10 +35,3 @@ jobs:
         if: ${{ !github.event.release.prerelease }}
         run: |
           echo yes
-
-      - name: "Debug"
-        if: ${{ always() }}
-        run: |
-          echo name: "${{ github.event.release.prerelease && 'testpypi' || 'pypi' }}"
-          echo url: "https://${{ github.event.release.prerelease && 'test.' || '' }}pypi.org/p/actions-tools"
-          echo GITHUB_REF_NAME: "${GITHUB_REF_NAME}"

@@ -3,6 +3,7 @@ name: "Local"
 on:
   workflow_dispatch:
   push:
+    branches: ["**"]
 
 jobs:
   test:
@@ -14,11 +15,49 @@ jobs:
       - name: "Checkout"
         uses: actions/checkout@v4
 
-      - name: "Test Local Action"
+      - name: "Debug event.json"
+        if: ${{ always() }}
+        run: |
+          cat "${GITHUB_EVENT_PATH}"
+
+      - name: "1: Test Local Action"
         id: test
         uses: ./
-        #with:
-        #  token: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          multi: |
+            ,  ,  ,
+
+      - name: "2: Test Local Action"
+        id: test
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          multi: |
+            fuck   ,,   , you,   retard
+
+      - name: "3: Test Local Action"
+        id: test
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          multi: |
+            fuck   ,    you,   retard,
+
+      - name: "4: Test Local Action"
+        id: test
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          multi: |
+            ,
+
+      - name: "5: Test Local Action"
+        id: test
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          multi: |
 
       - name: "Echo Outputs"
         run: |
