@@ -19,3 +19,4 @@ Click on a Template link below to get started...
 <!-- Use Preview Tab -->
 
 - [Release Template](?expand=1&template=release.md)
+- [Test Template](?expand=1&template=test.md)
