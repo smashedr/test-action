@@ -21,6 +21,14 @@ jobs:
         run: |
           cat "${GITHUB_EVENT_PATH}"
 
+      - name: "Debug"
+        if: ${{ always() }}
+        run: |
+          echo "name: ${{ github.event.release.name }}"
+          echo "tag_name: ${{ github.event.release.tag_name }}"
+          echo "html_url: ${{ github.event.release.html_url }}"
+          echo "body: ${{ github.event.release.body }}"
+
       - name: "1: Test Local Action"
         id: test
         uses: ./
