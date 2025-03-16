@@ -41,17 +41,17 @@ jobs:
         run: |
           echo "tags: ${{ steps.tags.outputs.tags }}"
 
-      - name: "not a release"
-        if: ${{ github.event_name != 'release' }}
-        run: |
-          echo yes
+      #- name: "not a release"
+      #  if: ${{ github.event_name != 'release' }}
+      #  run: |
+      #    echo yes
 
-      - name: "prerelease"
-        if: ${{ github.event.release.prerelease }}
-        run: |
-          echo yes
+      #- name: "prerelease"
+      #  if: ${{ github.event.release.prerelease }}
+      #  run: |
+      #    echo yes
 
-      - name: "release"
-        if: ${{ !github.event.release.prerelease }}
-        run: |
-          echo yes
+      #- name: "release"
+      #  if: ${{ !github.event.release.prerelease }}
+      #  run: |
+      #    echo yes
