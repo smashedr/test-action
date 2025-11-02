@@ -1,5 +1,6 @@
 name: "Test Action"
-description: "Test Action"
+#description: "Test Action"
+description: "Action to run actions-up and report outdated actions in Pull Requests, Workflow Outputs, or Job Status."
 author: "Shane"
 branding:
   icon: "type"
