@@ -35,7 +35,7 @@ const github = require('@actions/github')
         console.log('----------------------')
         const srcPath = path.join(actionPath, 'src')
         console.log('srcPath:', srcPath)
-        await exec.exec('ls', ['-lah', actionPath], { ignoreReturnCode: true })
+        await exec.exec('ls', ['-lah', srcPath], { ignoreReturnCode: true })
         console.log('----------------------')
 
         // core.startGroup('Actions')
