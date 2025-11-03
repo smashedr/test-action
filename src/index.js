@@ -1,3 +1,5 @@
+const path = require('node:path')
+
 const core = require('@actions/core')
 const exec = require('@actions/exec')
 const github = require('@actions/github')
@@ -17,9 +19,6 @@ const github = require('@actions/github')
         console.log(process.env)
         core.endGroup() // Debug process.env
 
-        console.log('__dirname:', __dirname)
-        console.log('__filename:', __filename)
-
         // Inputs
         core.startGroup('Inputs')
         const token = core.getInput('token', { required: true })
@@ -28,16 +27,27 @@ const github = require('@actions/github')
         console.log('multi:', multi)
         core.endGroup()
 
-        core.startGroup('Actions')
-        const options = { ignoreReturnCode: true }
-        // await exec.exec('tree', ['/home/runner/work/_actions/'], options)
-        await exec.exec('ls', ['-lah', '/home/runner/work/_actions/'], options)
-        console.log('GITHUB_ACTION_REPOSITORY:', process.env.GITHUB_ACTION_REPOSITORY)
-        console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
-        const actionPath = `/home/runner/work/_actions/${process.env.GITHUB_ACTION_REPOSITORY}/${process.env.GITHUB_ACTION_REF}`
+        console.log('__dirname:', __dirname)
+        console.log('__filename:', __filename)
+        const actionPath = path.resolve(__dirname, '..')
         console.log('actionPath:', actionPath)
-        await exec.exec('ls', ['-lah', actionPath], options)
-        core.endGroup() // Debug process.env
+        await exec.exec('ls', ['-lah', actionPath], { ignoreReturnCode: true })
+        console.log('----------------------')
+        const srcPath = path.join(actionPath, 'src')
+        console.log('srcPath:', srcPath)
+        await exec.exec('ls', ['-lah', actionPath], { ignoreReturnCode: true })
+        console.log('----------------------')
+
+        // core.startGroup('Actions')
+        // const options = { ignoreReturnCode: true }
+        // // await exec.exec('tree', ['/home/runner/work/_actions/'], options)
+        // await exec.exec('ls', ['-lah', '/home/runner/work/_actions/'], options)
+        // console.log('GITHUB_ACTION_REPOSITORY:', process.env.GITHUB_ACTION_REPOSITORY)
+        // console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
+        // const actionPath = `/home/runner/work/_actions/${process.env.GITHUB_ACTION_REPOSITORY}/${process.env.GITHUB_ACTION_REF}`
+        // console.log('actionPath:', actionPath)
+        // await exec.exec('ls', ['-lah', actionPath], options)
+        // core.endGroup() // Debug process.env
 
         // // Action
         // core.startGroup('Action')
