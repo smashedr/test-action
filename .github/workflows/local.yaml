@@ -6,8 +6,8 @@ on:
     branches: ["**"]
 
 jobs:
-  test:
-    name: "Test"
+  local:
+    name: "Local"
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
@@ -26,42 +26,43 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           multi: |
-            ,  ,  ,
+            one + one
+            two + two
 
-      - name: "2: Test Local Action"
-        id: test
-        uses: ./
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          multi: |
-            fuck   ,,   , you,   retard
-
-      - name: "3: Test Local Action"
-        id: test
-        uses: ./
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          multi: |
-            fuck   ,    you,   retard,
-
-      - name: "4: Test Local Action"
-        id: test
-        uses: ./
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          multi: |
-            ,
-
-      - name: "5: Test Local Action"
-        id: test
-        uses: ./
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          multi: |
-
-      - name: "Echo Outputs"
-        run: |
-          echo results: '${{ steps.test.outputs.results }}'
+      #- name: "2: Test Local Action"
+      #  id: test
+      #  uses: ./
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    multi: |
+      #      fuck   ,,   , you,   retard
+      #
+      #- name: "3: Test Local Action"
+      #  id: test
+      #  uses: ./
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    multi: |
+      #      fuck   ,    you,   retard,
+      #
+      #- name: "4: Test Local Action"
+      #  id: test
+      #  uses: ./
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    multi: |
+      #      ,
+      #
+      #- name: "5: Test Local Action"
+      #  id: test
+      #  uses: ./
+      #  with:
+      #    token: ${{ secrets.GITHUB_TOKEN }}
+      #    multi: |
+      #
+      #- name: "Echo Outputs"
+      #  run: |
+      #    echo results: '${{ steps.test.outputs.results }}'
 
   #lint:
   #  name: "Lint"
