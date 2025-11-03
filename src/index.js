@@ -25,6 +25,17 @@ const github = require('@actions/github')
         console.log('multi:', multi)
         core.endGroup()
 
+        core.startGroup('Actions')
+        const options = { ignoreReturnCode: true }
+        // await exec.exec('tree', ['/home/runner/work/_actions/'], options)
+        await exec.exec('ls', ['-lah', '/home/runner/work/_actions/'], options)
+        console.log('GITHUB_ACTION_REPOSITORY:', process.env.GITHUB_ACTION_REPOSITORY)
+        console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
+        const actionPath = `/home/runner/work/_actions/${process.env.GITHUB_ACTION_REPOSITORY}/${process.env.GITHUB_ACTION_REF}`
+        console.log('actionPath:', actionPath)
+        await exec.exec('ls', ['-lah', actionPath], options)
+        core.endGroup() // Debug process.env
+
         // // Action
         // core.startGroup('Action')
         // const result = token
