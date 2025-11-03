@@ -31846,6 +31846,9 @@ const github = __nccwpck_require__(3228)
         console.log(process.env)
         core.endGroup() // Debug process.env
 
+        console.log('__dirname:', __dirname)
+        console.log('__filename:', __filename)
+
         // Inputs
         core.startGroup('Inputs')
         const token = core.getInput('token', { required: true })
