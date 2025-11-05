@@ -1,15 +1,16 @@
-const path = require('node:path')
+import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
-const core = require('@actions/core')
-const exec = require('@actions/exec')
-const github = require('@actions/github')
+import * as core from '@actions/core'
+import * as exec from '@actions/exec'
+import * as github from '@actions/github'
 
-;(async () => {
+async function main() {
     try {
         const version = process.env.GITHUB_ACTION_REF
             ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
             : 'Local'
-        core.info(`🏳️ Starting Test Action 1 - ${version}`)
+        core.info(`🏳️ Starting Test Action - ${version}`)
 
         // Debug
         core.startGroup('Debug: github.context')
@@ -27,16 +28,13 @@ const github = require('@actions/github')
         console.log('multi:', multi)
         core.endGroup()
 
-        console.log('__dirname:', __dirname)
-        console.log('__filename:', __filename)
-        const actionPath = path.resolve(__dirname, '..')
-        console.log('actionPath:', actionPath)
-        await exec.exec('ls', ['-lah', actionPath], { ignoreReturnCode: true })
-        console.log('----------------------')
-        const srcPath = path.join(actionPath, 'src')
-        console.log('srcPath:', srcPath)
-        await exec.exec('ls', ['-lah', srcPath], { ignoreReturnCode: true })
-        console.log('----------------------')
+        const __filename = fileURLToPath(import.meta.url)
+        console.log(`__filename: ${__filename}`)
+        const __dirname = path.dirname(__filename)
+        console.log(`__dirname: ${__dirname}`)
+        const src = path.resolve(__dirname, '../src')
+        console.log(`src: ${src}`)
+        await exec.exec('ls', ['-lah', src], { ignoreReturnCode: true })
 
         // core.startGroup('Actions')
         // const options = { ignoreReturnCode: true }
@@ -64,4 +62,6 @@ const github = require('@actions/github')
         core.info(e.message)
         core.setFailed(e.message)
     }
-})()
+}
+
+await main()
