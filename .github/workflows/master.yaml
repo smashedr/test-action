@@ -4,6 +4,17 @@ on:
   workflow_dispatch:
   push:
     branches: ["master"]
+    paths:
+      - ".github/workflows/master.yaml"
+      - "dist/**"
+      - "src/**"
+      - "package*.json"
+      - "requirements*.txt"
+      - "action.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   master:
@@ -11,27 +22,36 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
 
+    permissions:
+      contents: write
+
     steps:
       - name: "Checkout"
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
-      - name: "Debug CTX: github"
+      - name: "Debug CTX github"
         if: ${{ !github.event.act }}
         continue-on-error: true
         env:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
 
-      - name: "Debug"
+      - name: "Debug Environment"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
         run: |
-          echo ${{ github.workflow_ref }}
+          env
 
-      - name: "Test Local Action"
+      - name: "Test Action"
         id: test
-        uses: smashedr/test-action@master
-        #with:
-        #  token: ${{ secrets.GITHUB_TOKEN }}
+        uses: smashedr/test-action@master # actions-up-ignore
+        with:
+          multi: one + one
 
-      - name: "Echo Outputs"
+      - name: "Verify Outputs"
         run: |
-          echo results: '${{ steps.test.outputs.results }}'
+          echo "results: '${{ steps.test.outputs.results }}'"
+          if [ -z '${{ steps.test.outputs.results }}' ];then
+            echo "No Output: results"
+            exit 1
+          fi

@@ -22,11 +22,12 @@ async function main() {
 
         // Inputs
         core.startGroup('Inputs')
-        const token = core.getInput('token', { required: true })
-        core.info(`token: ${token}`)
-        const multi = core.getMultilineInput('multi')
-        console.log('multi:', multi)
-        core.endGroup()
+        const inputs = {
+            token: core.getInput('token', { required: true }),
+            multi: core.getMultilineInput('multi'),
+        }
+        console.log(inputs)
+        core.endGroup() // Inputs
 
         // Setup
         const __filename = fileURLToPath(import.meta.url)
@@ -39,7 +40,7 @@ async function main() {
 
         // Action
         core.startGroup('Action')
-        const results = multi
+        const results = inputs.multi
         console.log('results:', results)
         core.endGroup()
 

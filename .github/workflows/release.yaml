@@ -9,13 +9,11 @@ jobs:
     name: "Release"
     runs-on: ubuntu-latest
     timeout-minutes: 5
+
     permissions:
       contents: write
 
     steps:
-      - name: "Checkout"
-        uses: actions/checkout@v4
-
       - name: "Debug CTX: github"
         if: ${{ !github.event.act }}
         continue-on-error: true
@@ -23,37 +21,29 @@ jobs:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
 
-      - name: "Debug"
-        if: ${{ always() }}
-        run: |
-          echo "name: ${{ github.event.release.name }}"
-          echo "tag_name: ${{ github.event.release.tag_name }}"
-          echo "html_url: ${{ github.event.release.html_url }}"
-          echo "body: ${{ github.event.release.body }}"
-
-      - name: "1: Test Local Action"
-        id: test
-        uses: ./
-
-      - name: "Update Version Tags"
+      - name: "Update Tags"
         id: tags
-        uses: cssnr/update-version-tags-action@master
+        uses: cssnr/update-version-tags-action@v1
 
       - name: "Debug Tags"
+        continue-on-error: true
         run: |
-          echo "tags: ${{ steps.tags.outputs.tags }}"
+          echo "github.ref_name: ${{ github.ref_name }}"
+          echo "steps.tags.outputs.tags: ${{ steps.tags.outputs.tags }}"
 
-      #- name: "not a release"
-      #  if: ${{ github.event_name != 'release' }}
-      #  run: |
-      #    echo yes
+      - name: "Update Release Notes Action"
+        continue-on-error: true
+        uses: smashedr/update-release-notes-action@master
+        with:
+          tags: ${{ steps.tags.outputs.tags }}
+          location: tail
 
-      #- name: "prerelease"
-      #  if: ${{ github.event.release.prerelease }}
-      #  run: |
-      #    echo yes
+      - name: "Package Changelog Action"
+        continue-on-error: true
+        uses: cssnr/package-changelog-action@v1
 
-      #- name: "release"
-      #  if: ${{ !github.event.release.prerelease }}
-      #  run: |
-      #    echo yes
+      - name: "Send Failure Notification"
+        if: ${{ failure() }}
+        uses: sarisia/actions-status-discord@11a0bfe3b50977e38aa2bd4a4ebd296415e83c19 # v1.15.4
+        with:
+          webhook: ${{ secrets.DISCORD_WEBHOOK }}

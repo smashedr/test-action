@@ -27269,11 +27269,12 @@ async function main() {
 
         // Inputs
         coreExports.startGroup('Inputs');
-        const token = coreExports.getInput('token', { required: true });
-        coreExports.info(`token: ${token}`);
-        const multi = coreExports.getMultilineInput('multi');
-        console.log('multi:', multi);
-        coreExports.endGroup();
+        const inputs = {
+            token: coreExports.getInput('token', { required: true }),
+            multi: coreExports.getMultilineInput('multi'),
+        };
+        console.log(inputs);
+        coreExports.endGroup(); // Inputs
 
         // Setup
         const __filename = fileURLToPath(import.meta.url);
@@ -27286,7 +27287,7 @@ async function main() {
 
         // Action
         coreExports.startGroup('Action');
-        const results = multi;
+        const results = inputs.multi;
         console.log('results:', results);
         coreExports.endGroup();
 

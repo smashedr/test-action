@@ -27,6 +27,7 @@ jobs:
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          #multi: one + one
           multi: |
             one + one
             two + two
