@@ -27253,53 +27253,53 @@ var execExports = requireExec();
 // import * as github from '@actions/github'
 
 async function main() {
-    try {
-        const version = process.env.GITHUB_ACTION_REF
-            ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
-            : 'Local';
-        coreExports.info(`🏳️ Starting Test Action - ${version}`);
+    const version = process.env.GITHUB_ACTION_REF
+        ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
+        : 'Local';
+    coreExports.info(`🏳️ Starting Test Action - ${version}`);
 
-        // // Debug
-        // core.startGroup('Debug: github.context')
-        // console.log(github.context)
-        // core.endGroup() // Debug github.context
-        // core.startGroup('Debug: process.env')
-        // console.log(process.env)
-        // core.endGroup() // Debug process.env
+    // // Debug
+    // core.startGroup('Debug: github.context')
+    // console.log(github.context)
+    // core.endGroup() // Debug github.context
+    // core.startGroup('Debug: process.env')
+    // console.log(process.env)
+    // core.endGroup() // Debug process.env
 
-        // Inputs
-        coreExports.startGroup('Inputs');
-        const inputs = {
-            token: coreExports.getInput('token', { required: true }),
-            multi: coreExports.getMultilineInput('multi'),
-        };
-        console.log(inputs);
-        coreExports.endGroup(); // Inputs
+    // Inputs
+    coreExports.startGroup('Inputs');
+    const inputs = {
+        token: coreExports.getInput('token', { required: true }),
+        multi: coreExports.getMultilineInput('multi'),
+    };
+    console.log(inputs);
+    coreExports.endGroup(); // Inputs
 
-        // Setup
-        const __filename = fileURLToPath(import.meta.url);
-        console.log(`__filename: ${__filename}`);
-        const __dirname = path.dirname(__filename);
-        console.log(`__dirname: ${__dirname}`);
-        const src = path.resolve(__dirname, '../src');
-        console.log(`src: ${src}`);
-        await execExports.exec('ls', ['-lah', src], { ignoreReturnCode: true });
+    // Setup
+    const __filename = fileURLToPath(import.meta.url);
+    console.log(`__filename: ${__filename}`);
+    const __dirname = path.dirname(__filename);
+    console.log(`__dirname: ${__dirname}`);
+    const src = path.resolve(__dirname, '../src');
+    console.log(`src: ${src}`);
+    await execExports.exec('ls', ['-lah', src], { ignoreReturnCode: true });
 
-        // Action
-        coreExports.startGroup('Action');
-        const results = inputs.multi;
-        console.log('results:', results);
-        coreExports.endGroup();
+    // Action
+    coreExports.startGroup('Action');
+    const results = inputs.multi;
+    console.log('results:', results);
+    coreExports.endGroup();
 
-        // Outputs
-        coreExports.setOutput('results', results);
+    // Outputs
+    coreExports.setOutput('results', results);
 
-        coreExports.info(`✅ \u001b[32;1mFinished Success`);
-    } catch (e) {
-        coreExports.debug(e);
-        coreExports.info(e.message);
-        coreExports.setFailed(e.message);
-    }
+    coreExports.info(`✅ \u001b[32;1mFinished Success`);
 }
 
-await main();
+try {
+    await main();
+} catch (e) {
+    coreExports.debug(e);
+    coreExports.info(e.message);
+    coreExports.setFailed(e.message);
+}
