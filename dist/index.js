@@ -31236,7 +31236,7 @@ function requireGithub () {
 	return github;
 }
 
-var githubExports = requireGithub();
+requireGithub();
 
 async function main() {
     try {
@@ -31245,13 +31245,13 @@ async function main() {
             : 'Local';
         coreExports.info(`🏳️ Starting Test Action - ${version}`);
 
-        // Debug
-        coreExports.startGroup('Debug: github.context');
-        console.log(githubExports.context);
-        coreExports.endGroup(); // Debug github.context
-        coreExports.startGroup('Debug: process.env');
-        console.log(process.env);
-        coreExports.endGroup(); // Debug process.env
+        // // Debug
+        // core.startGroup('Debug: github.context')
+        // console.log(github.context)
+        // core.endGroup() // Debug github.context
+        // core.startGroup('Debug: process.env')
+        // console.log(process.env)
+        // core.endGroup() // Debug process.env
 
         // Inputs
         coreExports.startGroup('Inputs');
