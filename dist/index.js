@@ -27296,6 +27296,14 @@ async function main() {
     coreExports.info(`✅ \u001b[32;1mFinished Success`);
 }
 
+// main()
+// await main()
+// main().catch((e) => {
+//     core.debug(e)
+//     core.info(e.message)
+//     core.setFailed(e.message)
+// })
+
 try {
     await main();
 } catch (e) {
