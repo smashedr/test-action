@@ -3,7 +3,7 @@ import { fileURLToPath } from 'node:url'
 
 import * as core from '@actions/core'
 import * as exec from '@actions/exec'
-import * as github from '@actions/github'
+// import * as github from '@actions/github'
 
 async function main() {
     try {
@@ -28,6 +28,7 @@ async function main() {
         console.log('multi:', multi)
         core.endGroup()
 
+        // Setup
         const __filename = fileURLToPath(import.meta.url)
         console.log(`__filename: ${__filename}`)
         const __dirname = path.dirname(__filename)
@@ -36,25 +37,14 @@ async function main() {
         console.log(`src: ${src}`)
         await exec.exec('ls', ['-lah', src], { ignoreReturnCode: true })
 
-        // core.startGroup('Actions')
-        // const options = { ignoreReturnCode: true }
-        // // await exec.exec('tree', ['/home/runner/work/_actions/'], options)
-        // await exec.exec('ls', ['-lah', '/home/runner/work/_actions/'], options)
-        // console.log('GITHUB_ACTION_REPOSITORY:', process.env.GITHUB_ACTION_REPOSITORY)
-        // console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
-        // const actionPath = `/home/runner/work/_actions/${process.env.GITHUB_ACTION_REPOSITORY}/${process.env.GITHUB_ACTION_REF}`
-        // console.log('actionPath:', actionPath)
-        // await exec.exec('ls', ['-lah', actionPath], options)
-        // core.endGroup() // Debug process.env
-
-        // // Action
-        // core.startGroup('Action')
-        // const result = token
-        // console.log('result:', result)
-        // core.endGroup()
+        // Action
+        core.startGroup('Action')
+        const results = multi
+        console.log('results:', results)
+        core.endGroup()
 
         // Outputs
-        core.setOutput('results', 'INOP')
+        core.setOutput('results', results)
 
         core.info(`✅ \u001b[32;1mFinished Success`)
     } catch (e) {
