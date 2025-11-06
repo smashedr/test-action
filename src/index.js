@@ -2,7 +2,7 @@ const path = require('node:path')
 
 const core = require('@actions/core')
 const exec = require('@actions/exec')
-const github = require('@actions/github')
+// const github = require('@actions/github')
 
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
@@ -10,13 +10,15 @@ async function main() {
         : 'Source'
     core.info(`🏳️ Starting Test Action 1 - ${version}`)
 
-    // Debug
-    core.startGroup('Debug: github.context')
-    console.log(github.context)
-    core.endGroup() // Debug github.context
-    core.startGroup('Debug: process.env')
-    console.log(process.env)
-    core.endGroup() // Debug process.env
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+
+    // // Debug
+    // core.startGroup('Debug: github.context')
+    // console.log(github.context)
+    // core.endGroup() // Debug github.context
+    // core.startGroup('Debug: process.env')
+    // console.log(process.env)
+    // core.endGroup() // Debug process.env
 
     // Inputs
     core.startGroup('Inputs')
@@ -63,16 +65,17 @@ async function main() {
 
 // main()
 // await main()
-// main().catch((e) => {
-//     core.debug(e)
-//     core.info(e.message)
-//     core.setFailed(e.message)
-// })
 
-try {
-    await main()
-} catch (e) {
+main().catch((e) => {
     core.debug(e)
     core.info(e.message)
     core.setFailed(e.message)
-}
+})
+
+// try {
+//     await main()
+// } catch (e) {
+//     core.debug(e)
+//     core.info(e.message)
+//     core.setFailed(e.message)
+// }
