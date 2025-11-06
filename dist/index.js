@@ -27618,7 +27618,7 @@ async function main() {
     console.log('results:', results)
     core.endGroup()
 
-    await myFunc()
+    await wait()
 
     // Outputs
     core.setOutput('results', results)
@@ -27626,9 +27626,9 @@ async function main() {
     core.info(`✅ \u001b[32;1mFinished Success`)
 }
 
-async function myFunc() {
-    core.info('setTimeout: 3000')
-    await new Promise((resolve) => setTimeout(resolve, 3000))
+async function wait(timeout = 1000 * 15) {
+    core.info(`setTimeout: ${timeout}`)
+    await new Promise((resolve) => setTimeout(resolve, timeout))
     core.info('setTimeout: done')
 }
 
