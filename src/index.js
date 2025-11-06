@@ -2,7 +2,7 @@ const path = require('node:path')
 
 const core = require('@actions/core')
 const exec = require('@actions/exec')
-// const github = require('@actions/github')
+const github = require('@actions/github')
 
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
@@ -10,13 +10,13 @@ async function main() {
         : 'Source'
     core.info(`🏳️ Starting Test Action 1 - ${version}`)
 
-    // // Debug
-    // core.startGroup('Debug: github.context')
-    // console.log(github.context)
-    // core.endGroup() // Debug github.context
-    // core.startGroup('Debug: process.env')
-    // console.log(process.env)
-    // core.endGroup() // Debug process.env
+    // Debug
+    core.startGroup('Debug: github.context')
+    console.log(github.context)
+    core.endGroup() // Debug github.context
+    core.startGroup('Debug: process.env')
+    console.log(process.env)
+    core.endGroup() // Debug process.env
 
     // Inputs
     core.startGroup('Inputs')
