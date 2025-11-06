@@ -8,7 +8,7 @@ import * as exec from '@actions/exec'
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
         ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
-        : 'Local'
+        : 'Source'
     core.info(`🏳️ Starting Test Action - ${version}`)
 
     // // Debug

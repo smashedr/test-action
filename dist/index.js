@@ -27255,7 +27255,7 @@ var execExports = requireExec();
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
         ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
-        : 'Local';
+        : 'Source';
     coreExports.info(`🏳️ Starting Test Action - ${version}`);
 
     // // Debug
