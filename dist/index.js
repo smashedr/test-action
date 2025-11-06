@@ -27269,7 +27269,8 @@ async function main() {
     // Inputs
     coreExports.startGroup('Inputs');
     const inputs = {
-        token: coreExports.getInput('token', { required: true }),
+        token: coreExports.getInput('token'),
+        // token: core.getInput('token', { required: true }),
         multi: coreExports.getMultilineInput('multi'),
     };
     console.log(inputs);
@@ -27289,6 +27290,11 @@ async function main() {
     const results = inputs.multi;
     console.log('results:', results);
     coreExports.endGroup();
+
+    console.log('import.meta.url:', import.meta.url);
+    console.log('fileURLToPath:', fileURLToPath(import.meta.url));
+    console.log('process.argv[0]:', process.argv[0]);
+    console.log('process.argv[1]:', process.argv[1]);
 
     // Outputs
     coreExports.setOutput('results', results);

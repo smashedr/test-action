@@ -9,5 +9,5 @@ export default {
         file: 'dist/index.js',
         format: 'esm',
     },
-    plugins: [commonjs(), nodeResolve()],
+    plugins: [commonjs(), nodeResolve({ preferBuiltins: true })],
 }

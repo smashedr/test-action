@@ -22,7 +22,8 @@ async function main() {
     // Inputs
     core.startGroup('Inputs')
     const inputs = {
-        token: core.getInput('token', { required: true }),
+        token: core.getInput('token'),
+        // token: core.getInput('token', { required: true }),
         multi: core.getMultilineInput('multi'),
     }
     console.log(inputs)
@@ -42,6 +43,11 @@ async function main() {
     const results = inputs.multi
     console.log('results:', results)
     core.endGroup()
+
+    console.log('import.meta.url:', import.meta.url)
+    console.log('fileURLToPath:', fileURLToPath(import.meta.url))
+    console.log('process.argv[0]:', process.argv[0])
+    console.log('process.argv[1]:', process.argv[1])
 
     // Outputs
     core.setOutput('results', results)
