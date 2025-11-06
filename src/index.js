@@ -61,7 +61,7 @@ async function main() {
     core.info(`✅ \u001b[32;1mFinished Success`)
 }
 
-async function wait(timeout = 1000 * 15) {
+async function wait(timeout = 1000 * 8) {
     core.info(`setTimeout: ${timeout}`)
     await new Promise((resolve) => setTimeout(resolve, timeout))
     core.info('setTimeout: done')

@@ -22,15 +22,22 @@ jobs:
           GITHUB_CTX: ${{ toJSON(github) }}
         run: echo "$GITHUB_CTX"
 
+      - name: "Debug Environment"
+        if: ${{ !github.event.act }}
+        continue-on-error: true
+        run: |
+          env
+
       - name: "1: Test Local Action"
         id: test
         uses: ./
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
+          #multi: one + one
           multi: |
             one + one
             two + two
 
-      - name: "Echo Outputs"
+      - name: "1: Echo Outputs"
         run: |
           echo results: '${{ steps.test.outputs.results }}'
