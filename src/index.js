@@ -10,8 +10,6 @@ async function main() {
         : 'Source'
     core.info(`🏳️ Starting Test Action 1 - ${version}`)
 
-    await new Promise((resolve) => setTimeout(resolve, 3000))
-
     // // Debug
     // core.startGroup('Debug: github.context')
     // console.log(github.context)
@@ -33,8 +31,6 @@ async function main() {
     console.log('__filename:', __filename)
     const actionPath = path.resolve(__dirname, '..')
     console.log('actionPath:', actionPath)
-    await exec.exec('ls', ['-lah', actionPath], { ignoreReturnCode: true })
-    console.log('----------------------')
     const srcPath = path.join(actionPath, 'src')
     console.log('srcPath:', srcPath)
     await exec.exec('ls', ['-lah', srcPath], { ignoreReturnCode: true })
@@ -57,10 +53,18 @@ async function main() {
     console.log('results:', results)
     core.endGroup()
 
+    await myFunc()
+
     // Outputs
     core.setOutput('results', results)
 
     core.info(`✅ \u001b[32;1mFinished Success`)
+}
+
+async function myFunc() {
+    core.info('setTimeout: 3000')
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+    core.info('setTimeout: done')
 }
 
 // main()
