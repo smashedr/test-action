@@ -10,13 +10,13 @@ async function main() {
         : 'Source'
     core.info(`🏳️ Starting Test Action 1 - ${version}`)
 
-    // Debug
-    core.startGroup('Debug: github.context')
-    console.log(github.context)
-    core.endGroup() // Debug github.context
-    core.startGroup('Debug: process.env')
-    console.log(process.env)
-    core.endGroup() // Debug process.env
+    // // Debug
+    // core.startGroup('Debug: github.context')
+    // console.log(github.context)
+    // core.endGroup() // Debug github.context
+    // core.startGroup('Debug: process.env')
+    // console.log(process.env)
+    // core.endGroup() // Debug process.env
 
     // Inputs
     core.startGroup('Inputs')
@@ -36,24 +36,12 @@ async function main() {
     await exec.exec('ls', ['-lah', srcPath], { ignoreReturnCode: true })
     console.log('----------------------')
 
-    // core.startGroup('Actions')
-    // const options = { ignoreReturnCode: true }
-    // // await exec.exec('tree', ['/home/runner/work/_actions/'], options)
-    // await exec.exec('ls', ['-lah', '/home/runner/work/_actions/'], options)
-    // console.log('GITHUB_ACTION_REPOSITORY:', process.env.GITHUB_ACTION_REPOSITORY)
-    // console.log('GITHUB_ACTION_REF:', process.env.GITHUB_ACTION_REF)
-    // const actionPath = `/home/runner/work/_actions/${process.env.GITHUB_ACTION_REPOSITORY}/${process.env.GITHUB_ACTION_REF}`
-    // console.log('actionPath:', actionPath)
-    // await exec.exec('ls', ['-lah', actionPath], options)
-    // core.endGroup() // Debug process.env
-
     // Action
     core.startGroup('Action')
+    await wait(1000 * 3)
     const results = multi
     console.log('results:', results)
     core.endGroup()
-
-    await wait()
 
     // Outputs
     core.setOutput('results', results)
@@ -61,7 +49,7 @@ async function main() {
     core.info(`✅ \u001b[32;1mFinished Success`)
 }
 
-async function wait(timeout = 1000 * 8) {
+async function wait(timeout = 1000 * 3) {
     core.info(`setTimeout: ${timeout}`)
     await new Promise((resolve) => setTimeout(resolve, timeout))
     core.info('setTimeout: done')
