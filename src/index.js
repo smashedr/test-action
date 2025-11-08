@@ -2,7 +2,7 @@ const path = require('node:path')
 
 const core = require('@actions/core')
 const exec = require('@actions/exec')
-const github = require('@actions/github')
+// const github = require('@actions/github')
 
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
@@ -33,8 +33,9 @@ async function main() {
     console.log('actionPath:', actionPath)
     const srcPath = path.join(actionPath, 'src')
     console.log('srcPath:', srcPath)
+    core.startGroup('ls srcPath')
     await exec.exec('ls', ['-lah', srcPath], { ignoreReturnCode: true })
-    console.log('----------------------')
+    core.endGroup() // ls srcPath
 
     // Action
     core.startGroup('Action')
