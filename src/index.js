@@ -6,9 +6,9 @@ const github = require('@actions/github')
 
 async function main() {
     const version = process.env.GITHUB_ACTION_REF
-        ? `\u001b[35;1m${process.env.GITHUB_ACTION_REF}`
+        ? `${process.env.GITHUB_ACTION_REF}`
         : 'Source'
-    core.info(`🏳️ Starting Test Action 1 - ${version}`)
+    core.info(`🏳️ Starting Test Action 1 - \u001b[35;1m${version}`)
 
     // // Debug
     // core.startGroup('Debug: github.context')
