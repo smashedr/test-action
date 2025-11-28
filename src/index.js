@@ -39,7 +39,7 @@ async function main() {
 
     // Action
     core.startGroup('Action')
-    await wait(1000 * 3)
+    await wait(1000)
     const results = multi
     console.log('results:', results)
     core.endGroup()
