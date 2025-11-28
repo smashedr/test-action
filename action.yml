@@ -2,6 +2,7 @@ name: "Test Action"
 # Description must be less than 125 characters.
 description: "Test Action"
 author: "Shane"
+
 branding:
   icon: "type"
   color: "green"
