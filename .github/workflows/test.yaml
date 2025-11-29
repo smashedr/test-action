@@ -39,8 +39,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           #multi: one + one
           multi: |
-            one + one
-            two + two
+            on e , tw o,
+            three,,four,,,
 
       - name: "1: Echo Outputs"
         run: |

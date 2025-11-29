@@ -27585,11 +27585,21 @@ async function main() {
 
     // Inputs
     core.startGroup('Inputs')
-    const token = core.getInput('token', { required: true })
-    core.info(`token: ${token}`)
+
+    // const token = core.getInput('token', { required: true })
+    // core.info(`token: ${token}`)
+
     const multi = core.getMultilineInput('multi')
     console.log('multi:', multi)
-    core.endGroup()
+
+    const value = core.getInput('multi')
+    const parts = value
+        .split(/[\r\n,]+/)
+        .map((s) => s.trim())
+        .filter((s) => s !== '')
+    console.log('parts:', parts)
+
+    core.endGroup() // Inputs
 
     // Path
     console.log('__dirname:', __dirname)
